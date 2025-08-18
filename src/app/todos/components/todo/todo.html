@@ -1,0 +1,14 @@
+<mat-card appearance="outlined" class="todo-card">
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon [fontIcon]="getStatusIcon()"></mat-icon>
+    </div>
+    <mat-card-title> {{ todo()?.title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ todo()?.description }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button matButton>Modifier</button>
+  </mat-card-actions>
+</mat-card>

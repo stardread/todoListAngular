@@ -1,0 +1,14 @@
+<div>
+  <h1>Todo List</h1>
+  <p>
+    Welcome to the Todo List application! Here you can manage your tasks
+    efficiently.
+  </p>
+  <button matButton="filled" (click)="refreshTodos()"> refresh </button>
+  <ul>
+    @for (todo of todosService.todos(); track todo._id){
+
+   <app-todo [todo]="todo"></app-todo>
+    }
+  </ul>
+</div>
