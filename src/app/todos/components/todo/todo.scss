@@ -1,4 +1,16 @@
 .todo-card {
-  max-width: 400px;
+  width: 400px;
   margin-top: 1rem;
+}
+
+.todo-bg {
+  background-color: #eb6d6d;
+}
+
+.inProgress-bg {
+  background-color: #ebd769;
+}
+
+.done-bg {
+  background-color: #80f383;
 }

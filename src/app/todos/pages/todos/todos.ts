@@ -1,27 +1,32 @@
 import { Component, inject } from '@angular/core';
 import { DataAccess } from '../../services/data-access';
-import { MatButton } from '@angular/material/button';
-import { Todo } from '../../components/todo/todo';
+import { MatTabsModule } from '@angular/material/tabs';
+import { TodoList } from '../../components/todo-list/todo-list';
+import { Status } from '../../enums/status';
 
 @Component({
   selector: 'app-todos',
-  imports: [MatButton, Todo],
+  imports: [MatTabsModule, TodoList],
   templateUrl: './todos.html',
   styleUrl: './todos.scss',
 })
 export class Todos {
   todosService = inject(DataAccess);
 
+
   ngOnInit(): void {
-    this.refreshTodos();
+    this.refreshTodos(Status[0]);
   }
 
-  async refreshTodos(): Promise<void> {
-
+  async refreshTodos(status: string): Promise<void> {
     try {
-      await this.todosService.getTodos();
+      await this.todosService.getTodosByStatus(status);
     } catch (error) {
       console.error('Error fetching todos:', error);
     }
+  }
+
+  onTabChange($event: any): void {
+    this.refreshTodos(Status[$event.index]);
   }
 }

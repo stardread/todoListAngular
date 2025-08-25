@@ -4,11 +4,16 @@
     Welcome to the Todo List application! Here you can manage your tasks
     efficiently.
   </p>
-  <button matButton="filled" (click)="refreshTodos()"> refresh </button>
-  <ul>
-    @for (todo of todosService.todos(); track todo._id){
 
-   <app-todo [todo]="todo"></app-todo>
-    }
-  </ul>
+  <mat-tab-group mat-align-tabs="center" (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="Todo">
+      <app-todo-list [todos]="todosService.todos().todo"></app-todo-list>
+    </mat-tab>
+    <mat-tab label="In progress">
+      <app-todo-list [todos]="todosService.todos().inProgress"></app-todo-list>
+    </mat-tab>
+    <mat-tab label="Done">
+      <app-todo-list [todos]="todosService.todos().done"></app-todo-list>
+    </mat-tab>
+  </mat-tab-group>
 </div>

@@ -1,4 +1,4 @@
-<mat-card appearance="outlined" class="todo-card">
+<mat-card appearance="outlined" class="todo-card" [ngClass]="`${todo()?.status}-bg`">
   <mat-card-header>
     <div mat-card-avatar>
       <mat-icon [fontIcon]="getStatusIcon()"></mat-icon>

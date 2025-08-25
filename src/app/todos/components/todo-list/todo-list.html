@@ -1,0 +1,13 @@
+@if(todosService.todosLoading()){
+
+<mat-spinner></mat-spinner>
+
+} @else { @if(todos()?.length === 0){
+
+<p>Aucune tache disponible.</p>
+
+} @else { @for (todo of todos(); track todo._id){
+
+<app-todo [todo]="todo"></app-todo>
+
+} } }
