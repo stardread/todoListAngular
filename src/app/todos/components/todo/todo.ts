@@ -5,6 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgClass } from '@angular/common';
 import { Status } from '../../enums/status';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { TodoFormDialog } from '../todo-form-dialog/todo-form-dialog';
+
 @Component({
   selector: 'app-todo',
   imports: [MatCardModule, MatButtonModule, MatIconModule, NgClass],
@@ -13,6 +16,17 @@ import { Status } from '../../enums/status';
 })
 export class Todo {
   todo = input<TodoModel>();
+
+  dialog = inject(MatDialog);
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '50%';
+    dialogConfig.data = {
+      todo: this.todo(),
+    };
+    this.dialog.open(TodoFormDialog, dialogConfig);
+  }
 
   getStatusIcon(): string {
     switch (this.todo()?.status) {

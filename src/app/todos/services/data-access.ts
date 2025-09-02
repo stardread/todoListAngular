@@ -18,19 +18,40 @@ export class DataAccess {
     this.todosLoading.set(true);
     const params = new HttpParams().set('status', status);
     try {
-
       const data = await firstValueFrom(
         this.http.get<Todo[]>(this.apiUrl, { params })
       );
-      this.todos.update((prev: TodoList) => (
-        {
-          ...prev,
-          [status]: data,
-        }
-      ));
+      this.todos.update((prev: TodoList) => ({
+        ...prev,
+        [status]: data,
+      }));
     } catch (error) {
       console.log('Error fetching todos:', error);
     }
     this.todosLoading.set(false);
+  }
+
+  async updateTodo(todo: Todo): Promise<boolean> {
+    let success = false;
+    try {
+      success = !!(await firstValueFrom(
+        this.http.patch(`${this.apiUrl}/${todo._id}`, todo)
+      ));
+    } catch (error) {
+      console.error('Error updating todo:', error);
+    }
+    return success;
+  }
+
+  async createTodo(todo: Todo): Promise<boolean> {
+    let success = false;
+    try {
+      success = !!(await firstValueFrom(
+        this.http.post(this.apiUrl, todo)
+      ));
+    } catch (error) {
+      console.error('Error creating todo:', error);
+    }
+    return success;
   }
 }

@@ -24,7 +24,7 @@ describe('Todo', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render title and description and show the Modifier button', async () => {
+  it('should render title and description and show the Update button', async () => {
     fixture.componentRef.setInput('todo', mockTodo);
 
     fixture.detectChanges();
@@ -41,7 +41,7 @@ describe('Todo', () => {
 
     const btn = fixture.debugElement.query(By.css('button'));
     expect(btn).toBeTruthy();
-    expect((btn.nativeElement.textContent || '').trim()).toContain('Modifier');
+    expect((btn.nativeElement.textContent || '').trim()).toContain('Update');
   });
 
   it('should display a done card', async () => {

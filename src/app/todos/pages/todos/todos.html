@@ -16,4 +16,7 @@
       <app-todo-list [todos]="todosService.todos().done"></app-todo-list>
     </mat-tab>
   </mat-tab-group>
+  <button matFab class="add-button" (click)="openDialog()" >
+    <mat-icon>add</mat-icon>
+  </button>
 </div>

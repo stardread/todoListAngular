@@ -9,6 +9,6 @@
     <p>{{ todo()?.description }}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button matButton>Modifier</button>
+    <button matButton (click)="openDialog()">Update</button>
   </mat-card-actions>
 </mat-card>

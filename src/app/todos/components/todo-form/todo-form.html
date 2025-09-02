@@ -1,0 +1,50 @@
+<form [formGroup]="todoForm()" (ngSubmit)="onSubmit()">
+  <p>
+    <mat-form-field appearance="fill" >
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" required />
+      @if(todoForm().get('title')?.invalid && (todoForm().get('title')?.dirty ||
+      todoForm().get('title')?.touched)) { @if
+      (todoForm().get('title')?.hasError('required')) {
+      <mat-error> Title is <strong>required</strong> </mat-error>
+      } }
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status" required>
+        @for( status of statuses; track status) {
+
+        <mat-option [value]="status.value">{{ status.viewValue }}</mat-option>
+        }
+      </mat-select>
+      @if(todoForm().get('status')?.invalid && (todoForm().get('status')?.dirty
+      || todoForm().get('status')?.touched)) {
+      @if(todoForm().get('status')?.hasError('required')) {
+      <mat-error> Status is <strong>required</strong> </mat-error>} }
+    </mat-form-field>
+  </p>
+
+  @if(errorMessage()) {
+  <mat-error>{{ errorMessage() }}</mat-error>
+  }
+
+  <button
+    matButton
+    color="primary"
+    type="submit"
+    [disabled]="todoForm().invalid"
+  >
+    {{ isEditMode() ? "Update" : "Create" }} Todo
+  </button>
+
+  <button matButton type="button" (click)="onCancel()">Cancel</button>
+
+</form>

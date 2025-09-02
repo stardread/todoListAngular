@@ -3,10 +3,13 @@ import { DataAccess } from '../../services/data-access';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TodoList } from '../../components/todo-list/todo-list';
 import { Status } from '../../enums/status';
-
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { TodoFormDialog } from '../../components/todo-form-dialog/todo-form-dialog';
 @Component({
   selector: 'app-todos',
-  imports: [MatTabsModule, TodoList],
+  imports: [MatTabsModule, TodoList, MatIconModule, MatButtonModule],
   templateUrl: './todos.html',
   styleUrl: './todos.scss',
 })
@@ -28,5 +31,13 @@ export class Todos {
 
   onTabChange($event: any): void {
     this.refreshTodos(Status[$event.index]);
+  }
+
+  dialog = inject(MatDialog);
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '50%';
+    this.dialog.open(TodoFormDialog, dialogConfig);
   }
 }
